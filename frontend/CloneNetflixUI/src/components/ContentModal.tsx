@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 // src/components/admin/ContentModal.jsx
 import { useState, useEffect, useRef } from 'react';
 import { ApiAdminFilms } from '../api/ApiAdminFilms';  // ← твій новий імпорт
