@@ -125,13 +125,13 @@ export default function ContentModal({ isOpen, onClose, initialData, onSave }: a
         }));
     };
 
-    const toggleGenre = (id: string) => {
+    const toggleGenre = (id: string | number) => {
         setSelectedGenreIds((prev) =>
             prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
         );
     };
 
-    const toggleCollection = (id: string) => {
+    const toggleCollection = (id: string | number) => {
         setSelectedCollectionIds((prev) =>
             prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
         );
@@ -148,7 +148,7 @@ export default function ContentModal({ isOpen, onClose, initialData, onSave }: a
             setSelectedFranchiseId(newId);
             setFranchiseName('');
             setShowFranchiseForm(false);
-        } catch (err) {
+        } catch (err: any) {
             toast.error('Помилка створення франшизи: ' + err.message);
         } finally {
             setFranchiseLoading(false);
@@ -166,14 +166,14 @@ export default function ContentModal({ isOpen, onClose, initialData, onSave }: a
             setSelectedGenreIds((prev) => [...prev, newId]);
             setGenreName('');
             setShowGenreForm(false);
-        } catch (err) {
+        } catch (err: any) {
             toast.error('Помилка створення жанру: ' + err.message);
         } finally {
             setGenreLoading(false);
         }
     };
 
-    const handleEpisodeChange = (e) => {
+    const handleEpisodeChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         const numericFields = ['number', 'duration'];
         setEpisodeForm((prev) => ({

@@ -31,7 +31,7 @@ interface ItemDetail {
 }
 
 const WatchLater: React.FC = () => {
-  const { language, getTMDBLanguage, t } = useLanguage();
+  const { getTMDBLanguage, t } = useLanguage();
   const { withLoading } = useLoading();
 
   const [storedItems, setStoredItems] = useState<StoredItem[]>([]);

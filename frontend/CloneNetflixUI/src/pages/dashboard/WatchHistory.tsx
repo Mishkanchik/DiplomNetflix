@@ -22,7 +22,7 @@ interface ItemDetail {
 }
 
 const WatchHistory: React.FC = () => {
-  const { language, getTMDBLanguage, t } = useLanguage();
+  const { getTMDBLanguage, t } = useLanguage();
   const { items, clearHistory, removeItem } = useWatchHistory();
   const { withLoading } = useLoading();
 
