@@ -53,7 +53,9 @@ const ProtectedRoute = ({ selectedGenres, setSelectedGenres, selectedRating, set
 };
 
 const GuestRoute = () => {
-  return isAuthenticated() ? <Navigate to="/dashboard" replace /> : <AuthLayout />;
+  return isAuthenticated()
+    ? <Navigate to="/dashboard" replace />
+    : <AuthLayout />;
 };
 
 const AdminRoute = ({ selectedGenres, setSelectedGenres, selectedRating, setSelectedRating }: any) => {
@@ -95,7 +97,7 @@ function App() {
         <Routes>
           {/* Гостьові маршрути (логін, реєстрація, лендінг тощо) */}
           <Route element={<GuestRoute />}>
-            <Route path="/" element={<PublicHomePage />} />
+            <Route index element={<PublicHomePage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/password-recovery" element={<PasswordRecovery />} />

@@ -15,7 +15,7 @@ export default function AuthLayout() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-5 flex items-center justify-between">
           {/* Логотип — менший на мобілках */}
           <Link
-            to="/dashboard"
+            to="/"
 
             tabIndex={-1} // Пропускает элемент при нажатии Tab
             className="flex items-center w-48 "
