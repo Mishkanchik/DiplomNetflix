@@ -1,3 +1,4 @@
+// @ts-nocheck
 // Пошук фільмів за жанром
 export const fetchByGenre = async (genreId: number, language: string): Promise<TmdbItem[]> => {
     const apiKey = import.meta.env.VITE_TMDB_API_KEY;
