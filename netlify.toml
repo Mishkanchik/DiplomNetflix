@@ -1,5 +1,5 @@
 [build]
-command = "cd frontend/CloneNetflixUI && npm install && npm run build"
+command = "cd frontend/CloneNetflixUI && npm ci && npm run build"
 publish = "frontend/CloneNetflixUI/dist"
 
 [[redirects]]
