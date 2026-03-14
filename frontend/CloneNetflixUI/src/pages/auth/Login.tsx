@@ -7,10 +7,10 @@ import { $t } from "../../lib/toast";
 import { useLanguage } from "../../contexts/LanguageContext";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-// import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 
 const API_URL = import.meta.env.VITE_API_URL;
-// const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID; // <--- додай в .env !
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID; // <--- додай в .env !
 
 export default function Login() {
   const [email, setEmail] = useState("");
