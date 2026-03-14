@@ -56,6 +56,9 @@ export const useLanguage = () => {
 
 export const translations: Record<Language, Record<string, string>> = {
   uk: {
+    'movies.top_rated':'Топ фільми',
+    'auth.confirm_password':'••••••••',
+    'dashboard.back_to_recommendation':'Назад',
     'details.no_overview': 'Опис фільму недоступний.',
     'details.rating_hint': 'Середня оцінка, ваша оцінка у дужках',
     'watchLater.title': 'Список на потім',
@@ -213,7 +216,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'profile.deleting': 'Видалення...',
     'profile.deleted_success': 'Акаунт видалено',
     'profile.delete_failed': 'Не вдалося видалити акаунт',
-    'movies.top_rated': 'Топ фільмів',
+
     'common.year': 'рік',
     'landing.tagline': 'Тисячі фільмів, серіалів, мультфільмів та аніме — українською, в один клік.',
     'landing.login': 'Увійти',
@@ -335,7 +338,6 @@ export const translations: Record<Language, Record<string, string>> = {
     'filter.rating_all': 'Усі оцінки',
     'filter.rating_label': 'Оцінка',
     'filter.genres_label': 'Жанри',
-
     'watchLater.removed': 'Видалено зі списку на потім',
       'series.top_rated': 'Топ серіалів',
       'cartoons.top': 'Топ мультфільмів',
@@ -361,22 +363,25 @@ export const translations: Record<Language, Record<string, string>> = {
     'watch_history.confirm_clear_desc': 'Ви впевнені, що хочете очистити історію переглядів?',
     'watch_history.cancel': 'Скасувати',
     'watch_history.confirm_clear_btn': 'Очистити',
+    'profile.delete_confirm_title_clear':'Підтвердити видалення',
+    'profile.delete_confirm_desc_clear':'Підтвердити видалення',
+    'profile.confirm_delite':'Видалити',
+    'watch_later.removed':'Видалено',
+'watch_history.removed':'Видалено',
+'profile.confirm_delete_clear': 'Видалити',
+'dashboard.back_to_recommendations':'Назад',
+
   },
 
- 
-
   en: {
-    'series.top_rated': 'Top Series',
-    'cartoons.top': 'Top Cartoons',
-    'filter.clear': 'Clear',
-    'favorites.confirm_clear': 'Are you sure you want to clear your favorites list?',
-    'favorites.clear_all': 'Clear All Favorites',
-    'favorites.cleared': 'Favorites list cleared',
-    'watchLater.removed': 'Movie removed from Watch Later list',
-    'watch_later.confirm_clear': 'Are you sure you want to clear your Watch Later list?',
-    'watchLater.clear': 'Clear Watch Later list',
-    'watch_history.confirm_clear': 'Are you sure you want to clear your watch history?',
-    'watch_history.cleared': 'Watch history cleared',
+    'dashboard.back_to_recommendations':'Back',
+
+    'watch_history.removed':'Delete',
+    'watch_later.removed':'Delete',
+    'profile.delete_confirm_title_clear':'Profile delete confirm',
+    'profile.delete_confirm_desc_clear':'Profile delete confirm',
+    'profile.confirm_delete':'Delete ',
+    'movies.top_rated':'Top movies.',
     'watch_history.confirm_clear_title': 'Clear Watch History?',
     'watch_history.confirm_clear_desc': 'Are you sure you want to clear your watch history?',
     'watch_history.cancel': 'Cancel',
@@ -390,7 +395,17 @@ export const translations: Record<Language, Record<string, string>> = {
     'favorites.confirm_clear_desc': 'Are you sure you want to clear your favorites list?',
     'favorites.cancel': 'Cancel',
     'favorites.confirm_clear_title': 'Clear Favorites?',
-    'movies.top_rated': 'Top Movies',
+    'series.top_rated': 'Top Rated Series',
+    'cartoons.top': 'Top Cartoons',
+    'filter.clear': 'Clear',
+    'favorites.confirm_clear': 'Are you sure you want to clear your favorites list?',
+    'favorites.clear_all': 'Clear All Favorites',
+    'favorites.cleared': 'Favorites list cleared',
+    'watchLater.removed': 'Movie removed from Watch Later list',
+    'watch_later.confirm_clear': 'Are you sure you want to clear your Watch Later list?',
+    'watchLater.clear': 'Clear Watch Later list',
+    'watch_history.confirm_clear': 'Are you sure you want to clear your watch history?',
+    'watch_history.cleared': 'Watch history cleared',
 
     'filter.genres_all': 'All Genres',
     'filter.rating_all': 'All Ratings',
@@ -663,5 +678,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'subscriptionManagement.planChanged': 'Plan changed',
     'subscriptionManagement.currentPlan': 'Current plan',
     'subscriptionManagement.choosePlan': 'Choose',
+    'dashboard.back_to_recommendation': 'Back',
+    'profile.confirm_delete_clear': 'Delete',
   },
 };
