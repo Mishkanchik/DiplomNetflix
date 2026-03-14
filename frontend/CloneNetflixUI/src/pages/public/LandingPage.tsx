@@ -79,74 +79,73 @@ const LandingPage: React.FC = () => {
     $t.error(t('landing.login_required'), { duration: 5000 });
   };
 
-  // Функція для визначення типу контенту
   const getMediaTypeLabel = (item: Item) => {
-    // Якщо є поле media_type — використовуємо його
     if (item.media_type === "movie") return t('landing.movie');
     if (item.media_type === "tv") return t('landing.series');
-
-    // Якщо поля немає — fallback (для безпеки)
-    return t('landing.movie'); // або можна додати логіку за секцією
+    return t('landing.movie');
   };
 
   const renderGrid = (items: Item[], title: string) => (
-    <section className="mb-12 sm:mb-20 px-2 sm:px-0">
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-6 sm:mb-12 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+    <section className="mb-10 sm:mb-16 px-3 sm:px-4 lg:px-0">
+      <h2 className="text-2xl xs:text-3xl sm:text-4xl font-extrabold text-center mb-6 sm:mb-10 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
         {title}
       </h2>
-      <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6">
+
+      <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-5 lg:gap-6">
         {items.map((item) => (
           <button
             key={item.id}
             onClick={handleCardClick}
             className="
-              group relative overflow-hidden rounded-xl sm:rounded-2xl
-              shadow-lg sm:shadow-2xl transition-all duration-500
-              hover:scale-105 active:scale-100 hover:shadow-purple-500/30
+              group relative overflow-hidden rounded-lg sm:rounded-xl
+              shadow-md sm:shadow-xl transition-all duration-300
+              hover:scale-[1.04] active:scale-100 hover:shadow-purple-600/40
+              focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-black
             "
           >
             {item.poster_path ? (
               <img
                 src={`${TMDB_IMG_BASE}${item.poster_path}`}
                 alt={item.title || item.name}
-                className="w-full aspect-[2/3] object-cover transition-transform duration-700 group-hover:scale-110"
+                className="w-full aspect-[2/3] object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
+                decoding="async"
               />
             ) : (
-              <div className="w-full aspect-[2/3] bg-gray-800 flex items-center justify-center text-gray-500 text-xs sm:text-sm">
+              <div className="w-full aspect-[2/3] bg-gray-800/80 flex items-center justify-center text-gray-400 text-xs sm:text-sm font-medium">
                 {t('common.poster_missing')}
               </div>
             )}
 
-            {/* Тип контенту — бейджик зверху ліворуч */}
-            <div className="absolute top-2 sm:top-3 left-2 sm:left-3 z-10">
+            {/* Бейджик типу контенту */}
+            <div className="absolute top-1.5 sm:top-2 left-1.5 sm:left-2 z-10">
               <span className="
-                inline-block px-2.5 sm:px-3 py-1 sm:py-1.5 
-                bg-gradient-to-r from-indigo-600/90 to-purple-600/90 
-                text-white text-xs sm:text-sm font-medium 
-                rounded-full shadow-md backdrop-blur-sm border border-white/10
+                inline-block px-2 py-0.5 sm:px-2.5 sm:py-1 
+                bg-gradient-to-r from-indigo-700/90 to-purple-700/90 
+                text-white text-[10px] sm:text-xs font-semibold 
+                rounded-full shadow-sm backdrop-blur-sm border border-white/10
               ">
                 {getMediaTypeLabel(item)}
               </span>
             </div>
 
-            {/* Оверлей з інформацією */}
+            {/* Оверлей */}
             <div className="
-              absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent
-              flex flex-col justify-end p-3 sm:p-5
-              sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300
+              absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent
+              flex flex-col justify-end p-2.5 sm:p-4
+              opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300
             ">
-              <h3 className="text-base sm:text-lg md:text-xl font-bold text-white mb-1.5 sm:mb-2 line-clamp-2">
+              <h3 className="text-sm sm:text-base md:text-lg font-bold text-white leading-tight line-clamp-2 mb-1">
                 {item.title || item.name}
               </h3>
-              <div className="flex items-center justify-between flex-wrap gap-2">
-                <p className="text-gray-300 text-xs sm:text-sm">
-                  {(item.release_date || item.first_air_date || "").slice(0, 4) || "Невідомо"}
-                </p>
+              <div className="flex items-center justify-between text-xs sm:text-sm">
+                <span className="text-gray-300">
+                  {(item.release_date || item.first_air_date || "—").slice(0, 4)}
+                </span>
                 {item.vote_average > 0 && (
-                  <p className="text-yellow-400 font-bold text-xs sm:text-sm flex items-center gap-1">
-                    ⭐ {item.vote_average.toFixed(1)}
-                  </p>
+                  <span className="text-yellow-400 font-semibold flex items-center gap-1">
+                    ★ {item.vote_average.toFixed(1)}
+                  </span>
                 )}
               </div>
             </div>
@@ -158,37 +157,38 @@ const LandingPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
-      {/* HERO SECTION — адаптивна */}
-      <div className="relative h-[70vh] sm:h-screen w-full flex items-center justify-center overflow-hidden">
+      {/* HERO — mobile-first */}
+      <div className="relative h-[85vh] sm:h-[100vh] w-full flex items-center justify-center overflow-hidden">
         {!loading && trending.length > 0 && (
           <div className="absolute inset-0 -z-10">
             <SimpleHeroSlider movies={trending} />
           </div>
         )}
 
-        <div className="absolute inset-0 bg-black/60 sm:bg-black/50 backdrop-blur-[2px] sm:backdrop-blur-sm" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black/80" />
 
-        <div className="relative z-20 text-center px-5 sm:px-6 max-w-5xl mx-auto">
-          <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black mb-4 sm:mb-6 leading-tight drop-shadow-2xl">
+        <div className="relative z-20 text-center px-5 sm:px-8 md:px-12 max-w-5xl mx-auto">
+          <h1 className="text-5xl xs:text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black mb-4 sm:mb-6 leading-tight drop-shadow-2xl">
             <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
               Nexo
-            </span>{" "}
+            </span>
             <span className="text-white">Cinema</span>
           </h1>
 
-          <p className="text-lg sm:text-xl md:text-3xl lg:text-4xl text-gray-200 mb-8 sm:mb-12 max-w-4xl mx-auto font-light drop-shadow-lg">
+          <p className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-200 mb-8 sm:mb-12 max-w-4xl mx-auto font-light drop-shadow-lg leading-relaxed">
             {t('landing.tagline')}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-8 sm:mb-10">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-5 justify-center items-center mb-8 sm:mb-12">
             <Link
               to="/login"
               className="
-                px-8 sm:px-12 py-4 sm:py-5 
-                bg-gradient-to-r from-cyan-500 to-purple-600 
-                hover:from-cyan-600 hover:to-purple-700 
-                rounded-xl sm:rounded-2xl font-bold text-lg sm:text-xl 
-                shadow-2xl transition-all duration-300 transform hover:scale-105 active:scale-95
+                px-8 py-3.5 sm:px-10 sm:py-4.5 
+                bg-gradient-to-r from-cyan-600 to-purple-700 
+                hover:from-cyan-700 hover:to-purple-800 
+                rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg 
+                shadow-xl transition-all duration-300 transform hover:scale-105 active:scale-98
+                focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-black
               "
             >
               {t('landing.login')}
@@ -197,11 +197,11 @@ const LandingPage: React.FC = () => {
             <Link
               to="/register"
               className="
-                px-8 sm:px-12 py-4 sm:py-5 
-                bg-white/10 hover:bg-white/20 backdrop-blur-lg 
+                px-8 py-3.5 sm:px-10 sm:py-4.5 
+                bg-white/10 hover:bg-white/20 backdrop-blur-md 
                 border border-white/30 rounded-xl sm:rounded-2xl 
-                font-bold text-lg sm:text-xl 
-                transition-all duration-300 transform hover:scale-105 active:scale-95
+                font-bold text-base sm:text-lg 
+                transition-all duration-300 transform hover:scale-105 active:scale-98
               "
             >
               {t('landing.register_free')}
@@ -210,28 +210,28 @@ const LandingPage: React.FC = () => {
             <Link
               to="/about-help"
               className="
-                px-8 sm:px-12 py-4 sm:py-5 
-                bg-gradient-to-r from-indigo-400 to-purple-500 
-                hover:from-indigo-500 hover:to-purple-600 
-                rounded-xl sm:rounded-2xl font-bold text-lg sm:text-xl 
-                shadow-2xl transition-all duration-300 transform hover:scale-105 active:scale-95
+                px-8 py-3.5 sm:px-10 sm:py-4.5 
+                bg-gradient-to-r from-indigo-500 to-purple-600 
+                hover:from-indigo-600 hover:to-purple-700 
+                rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg 
+                shadow-xl transition-all duration-300 transform hover:scale-105 active:scale-98
               "
             >
               {t('aboutHelp.title')}
             </Link>
           </div>
 
-          <p className="text-gray-400 text-base sm:text-lg">
+          <p className="text-gray-400 text-sm sm:text-base md:text-lg">
             {t('landing.features')}
           </p>
         </div>
       </div>
 
-      {/* КОНТЕНТ ПІСЛЯ HERO */}
-      <div className="relative z-20 -mt-16 sm:-mt-24 pb-12 sm:pb-24 px-4 sm:px-6">
+      {/* Основний контент */}
+      <div className="relative z-20 -mt-20 sm:-mt-32 pb-12 sm:pb-20 px-3 sm:px-5 lg:px-6">
         <div className="container mx-auto max-w-7xl">
           {loading ? (
-            <div className="text-center py-20 sm:py-40 text-2xl sm:text-3xl text-gray-500">
+            <div className="text-center py-16 sm:py-32 text-xl sm:text-3xl text-gray-400">
               {t('landing.loading')}
             </div>
           ) : (
@@ -242,21 +242,21 @@ const LandingPage: React.FC = () => {
           )}
 
           {/* Фінальний CTA */}
-          <div className="mt-12 sm:mt-20 py-12 sm:py-20 bg-gradient-to-r from-purple-900/40 via-pink-900/30 to-cyan-900/40 rounded-2xl sm:rounded-3xl border border-white/10 backdrop-blur-md text-center px-4 sm:px-8">
-            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black mb-6 sm:mb-8 bg-gradient-to-r from-cyan-300 to-purple-400 bg-clip-text text-transparent">
+          <div className="mt-10 sm:mt-16 py-10 sm:py-16 bg-gradient-to-r from-purple-950/50 via-pink-950/40 to-cyan-950/50 rounded-2xl sm:rounded-3xl border border-white/10 backdrop-blur-md text-center px-5 sm:px-10">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold mb-5 sm:mb-8 bg-gradient-to-r from-cyan-300 to-purple-400 bg-clip-text text-transparent">
               {t('landing.cta_title')}
             </h2>
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-200 mb-8 sm:mb-10 max-w-3xl mx-auto">
+            <p className="text-base sm:text-xl md:text-2xl text-gray-200 mb-6 sm:mb-10 max-w-3xl mx-auto leading-relaxed">
               {t('landing.cta_description')}
             </p>
             <Link
               to="/register"
               className="
-                inline-block px-10 sm:px-14 py-4 sm:py-6 
+                inline-block px-10 sm:px-14 py-4 sm:py-5 
                 bg-gradient-to-r from-purple-600 via-pink-600 to-cyan-600 
                 hover:from-purple-700 hover:via-pink-700 hover:to-cyan-700 
-                rounded-xl sm:rounded-2xl font-bold text-xl sm:text-2xl 
-                shadow-2xl transition-all duration-500 transform hover:scale-105 active:scale-95
+                rounded-xl sm:rounded-2xl font-bold text-lg sm:text-xl 
+                shadow-2xl transition-all duration-400 transform hover:scale-105 active:scale-98
               "
             >
               {t('landing.register_free')}
