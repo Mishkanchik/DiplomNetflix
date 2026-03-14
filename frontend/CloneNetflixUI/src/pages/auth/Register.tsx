@@ -206,7 +206,7 @@ export default function Register() {
               <input
                 type={showConfirm ? "text" : "password"}
                 name="confirmPassword"
-                placeholder={t("auth.confirm_password") || "Підтвердіть пароль"}
+                placeholder={t("auth.password_placeholder") || "Підтвердіть пароль"}
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 className={`w-full px-6 py-4 pr-14 bg-gray-800/70 border ${errors.confirmPassword ? "border-red-500/60" : "border-gray-700/80"
