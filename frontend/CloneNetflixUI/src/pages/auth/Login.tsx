@@ -143,39 +143,39 @@ export default function Login() {
     $t.success(t("auth.login_success") || "Вхід успішний!");
     navigate("/dashboard");
   };
-  // // ── Google Login ──
-  // const handleGoogleSuccess = async (credentialResponse: any) => {
-  //   try {
-  //     setLoading(true);
+  // ── Google Login ──
+  const handleGoogleSuccess = async (credentialResponse: any) => {
+    try {
+      setLoading(true);
 
-  //     const googleToken = credentialResponse.credential; // це ID Token (JWT від Google)
+      const googleToken = credentialResponse.credential; // це ID Token (JWT від Google)
 
-  //     const res = await fetch(`${API_URL}/api/Auth/GoogleLogin`, {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({ token: googleToken }),
-  //     });
+      const res = await fetch(`${API_URL}/api/Auth/GoogleLogin`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: googleToken }),
+      });
 
-  //     if (!res.ok) {
-  //       const errData = await res.json();
-  //       throw new Error(errData.message || "Помилка Google авторизації");
-  //     }
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.message || "Помилка Google авторизації");
+      }
 
-  //     const data = await res.json();
-  //     await handleSuccessfulLogin(data.token); // твій бекенд повертає свій JWT
-  //   } catch (err: any) {
-  //     $t.error(mapError(err?.message || ""));
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+      const data = await res.json();
+      await handleSuccessfulLogin(data.token); // твій бекенд повертає свій JWT
+    } catch (err: any) {
+      $t.error(mapError(err?.message || ""));
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  // const handleGoogleError = () => {
-  //   $t.error(t("auth.google_login_failed") || "Не вдалося увійти через Google");
-  // };
+  const handleGoogleError = () => {
+    $t.error(t("auth.google_login_failed") || "Не вдалося увійти через Google");
+  };
 
   return (
-    // <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-indigo-950/40 to-black px-4 py-12">
       <div className="w-full max-w-lg bg-gray-900/85 backdrop-blur-2xl rounded-3xl border border-gray-800/60 shadow-2xl shadow-indigo-950/50 overflow-hidden transform transition-all duration-500 hover:shadow-indigo-900/40">
         <div className="px-10 pt-14 pb-12">
@@ -252,7 +252,7 @@ export default function Login() {
             </button>
           </form>
 
-          {/* Розділювач
+          
             <div className="relative my-8">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-700"></div>
@@ -261,10 +261,10 @@ export default function Login() {
                 <span className="px-4 bg-gray-900/85 text-gray-400">{"або"}</span>
 
               </div >
-            </div > */}
+            </div > 
 
           {/* Google кнопка */}
-          {/* 
+          
             < div className="mt-6 w-full flex justify-center text-center" >
               <div className="w-full max-w-sm rounded-xl overflow-hidden shadow-md hover:shadow-lg flex justify-center transition">
                 <GoogleLogin
@@ -280,12 +280,12 @@ export default function Login() {
                   width="100%"
                 />
               </div>
-            </div > */}
+            </div >
 
 
         </div >
       </div >
     </div >
-    // </GoogleOAuthProvider >
+     </GoogleOAuthProvider >
   );
 }
