@@ -232,7 +232,6 @@ export default function Login() {
               </a>
             </div>
 
-            Кнопка звичайного входу
             <button
               type="submit"
               disabled={loading}
