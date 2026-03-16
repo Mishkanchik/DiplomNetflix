@@ -89,7 +89,15 @@ export default function Register() {
       });
 
       if (!res.ok) {
-        const errData = await res.json();
+        if (!res.headers.get("Content-Type")?.includes("application/json")) {
+        throw new Error("Сервер повернув не JSON-відповідь. Переконайтеся, що бекенд працює.");
+      }
+      let errData;
+      try {
+        errData = await res.json();
+      } catch {
+        errData = {};
+      }
         const message =
           errData.message ||
           errData.errors?.Email?.[0] ||
